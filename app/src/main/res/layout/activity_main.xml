@@ -7,17 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="ui.MainActivity">
 
     <!-- Importation Toolbar -->
     <include
         layout="@layout/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <!--
-    TabLayout, ViewPage
-    -->
 
     <TextView
         android:id="@+id/MainActivity_textView_Title"

@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Suivi des vinifications</string>
+    <string name="cuves">Cuves</string>
+    <string name="cuve_number">Numero de la cuve</string>
+    <string name="cuve_volume">Volume de la cuve</string>
+    <string name="cuve_month">Mois arrivage </string>
+    <string name="cuve_color">Couleur du cépage</string>
+    <string name="cuve_variety">Cépage de la cuve</string>
+
+
+
 
 </resources>

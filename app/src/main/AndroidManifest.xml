@@ -10,7 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Suivi_Vinification">
         <activity
-            android:name=".MainActivity"
+            android:name="ui.CuveDetails"
+            android:exported="true" />
+        <activity
+            android:name="ui.CuveActivity"
+            android:exported="true" />
+        <activity
+            android:name="ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

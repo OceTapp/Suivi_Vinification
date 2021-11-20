@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A CardView that contains a TextView -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RecyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="10dp"
+    android:layout_marginLeft="10dp"
+    android:layout_gravity="center"
+    >
+
+    <ImageView
+        android:id="@+id/CuveActivity_ImageView_Card"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/cuve3"
+        />
+
+    <TextView
+        android:id="@+id/CuveActivity_TextView_TitleCard"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="100dp"
+        android:text="Title"
+        android:textSize="22dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/CuveActivity_TextView_CepageCard"
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="30dp"
+        android:text="Cepage"
+        android:textSize="15dp"
+        android:textColor="#a9a9a9"
+        />
+
+    <Button
+        android:id="@+id/CuveActivity_Button_Details"
+        android:layout_marginStart="250dp"
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Details"
+        android:textSize="15dp"
+
+        />
+
+
+</androidx.cardview.widget.CardView>

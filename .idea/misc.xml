@@ -4,10 +4,14 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
+        <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/layout/activity_cuve.xml" value="0.17798913043478262" />
+        <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/layout/activity_cuve_details.xml" value="0.2975778546712803" />
         <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/layout/activity_main.xml" value="0.17798913043478262" />
+        <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/layout/recycler_view.xml" value="0.12360688956433637" />
         <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/layout/test.xml" value="0.17798913043478262" />
         <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/layout/toolbar.xml" value="0.13020833333333334" />
         <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/menu/menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/menu/menu_toolbar.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/ocean/Documents/HES/5emeSemestre/Mobile/Projet/Suivi_Vinification/app/src/main/res/menu/toolbar.xml" value="0.13020833333333334" />
       </map>
     </option>

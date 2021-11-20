@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menu_activity_main_home"
+        android:id="@+id/main_home"
         android:title="Accueil"/>
     <item
-        android:id="@+id/menu_activity_main_cuves"
+        android:id="@+id/main_cuves"
         android:title="Cuves">
     </item>
     <item
-        android:id="@+id/menu_activity_main_params"
+        android:id="@+id/main_params"
         android:title="Paramètres">
     </item>
 </menu>
