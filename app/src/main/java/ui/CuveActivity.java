@@ -61,7 +61,7 @@ public class CuveActivity extends AppCompatActivity {
         //mCepage = findViewById(R.id.CuveActivity_TextView_CepageCard);
         //mButtonDetails = findViewById(R.id.CuveActivity_Button_Details);
 
-        RecyclerView recyclerView = findViewById(R.id.RecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.cuvesRecyclerView);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
