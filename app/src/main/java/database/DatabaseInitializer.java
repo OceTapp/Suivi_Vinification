@@ -34,7 +34,7 @@ public class DatabaseInitializer {
         addCuve(db,4, 200,"septembre","rouge","humagne rouge");
         addCuve(db,6, 150,"novembre","rouge","syrah");
         addCuve(db,8, 300,"septembre","blanc","pinot blanc");
-        addCuve(db,10, 300,"septembre","blanc","fendant");
+       // addCuve(db,10, 300,"septembre","blanc","fendant");
 
     }
 

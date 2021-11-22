@@ -41,7 +41,7 @@ public class CuveViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableCuve.setValue(null);
 
-        LiveData<CuveEntity> cuve = repository.getCuve(number,applicationContext);
+        LiveData<CuveEntity> cuve = repository.getCuve(applicationContext,number);
 
         // observe the changes of the cuve entity from the database and forward them
         observableCuve.addSource(cuve, observableCuve::setValue);
@@ -84,11 +84,11 @@ public class CuveViewModel extends AndroidViewModel {
         repository.insert(cuve, callback, applicationContext);
     }
 
-    public void updateClient(CuveEntity cuve, OnAsyncEventListener callback) {
+    public void updateCuve(CuveEntity cuve, OnAsyncEventListener callback) {
         repository.update(cuve, callback, applicationContext);
     }
 
-    public void deleteClient(CuveEntity cuve, OnAsyncEventListener callback) {
+    public void deleteCuve(CuveEntity cuve, OnAsyncEventListener callback) {
         repository.delete(cuve, callback, applicationContext);
     }
 }

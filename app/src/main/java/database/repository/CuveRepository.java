@@ -36,14 +36,14 @@ public class CuveRepository {
         return instance;
     }
 
-    public LiveData<CuveEntity> getCuve(final int number,Context context) {
-        return AppDatabase.getInstance(context).cuveDao().getNumber(number);
+    public LiveData<CuveEntity> getCuve(Context context,final int number) {
+        return AppDatabase.getInstance(context).cuveDao().getCuveByNumber(number);
     }
 
 
     //Méthode qui liste l'ensemble des cuves en utilisant la requête indiqué dans DAO
     public LiveData<List<CuveEntity>> getAllCuves(Context context) {
-        return AppDatabase.getInstance(context).cuveDao().getAll();
+        return AppDatabase.getInstance(context).cuveDao().getAllCuves();
     }
 
     /**

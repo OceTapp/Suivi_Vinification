@@ -20,6 +20,7 @@
         android:layout_marginTop="20dp"
         android:textSize="18dp"
         android:textAlignment="center"
+        android:textColor="#000"
         android:text="Details cuve"
         />
 

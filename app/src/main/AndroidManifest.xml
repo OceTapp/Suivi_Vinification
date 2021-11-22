@@ -9,12 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Suivi_Vinification">
+
+        <activity
+            android:name="ui.SettingsActivity"
+            android:exported="true" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="ui.MainActivity"/>
+        </activity>
+
         <activity
             android:name="ui.CuveDetails"
-            android:exported="true" />
+            android:exported="true" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="ui.CuveActivity"/>
+        </activity>
+
         <activity
             android:name="ui.CuveActivity"
-            android:exported="true" />
+            android:exported="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="ui.MainActivity"/>
+        </activity>
+
         <activity
             android:name="ui.MainActivity"
             android:exported="true">

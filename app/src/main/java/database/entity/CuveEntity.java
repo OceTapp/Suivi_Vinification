@@ -74,7 +74,7 @@ public class CuveEntity {
         return period;
     }
 
-    public void setPeriod(String month) {
+    public void setPeriod(String period) {
         this.period = period;
     }
 
@@ -94,7 +94,6 @@ public class CuveEntity {
         this.variety = variety;
     }
 
-   //TO DO voir si ça marche
     @Override
         public boolean equals(Object obj) {
             if (obj == null) return false;

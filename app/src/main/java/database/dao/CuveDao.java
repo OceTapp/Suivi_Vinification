@@ -23,10 +23,10 @@ public interface CuveDao {
 
 
     @Query("SELECT * FROM cuves WHERE numero = :number")
-    LiveData<CuveEntity> getNumber(int number);
+    LiveData<CuveEntity> getCuveByNumber(int number);
 
     @Query("SELECT * FROM cuves")
-    LiveData<List<CuveEntity>> getAll();
+    LiveData<List<CuveEntity>> getAllCuves();
 
     @Insert
     void insert(CuveEntity cuve) throws SQLiteConstraintException;

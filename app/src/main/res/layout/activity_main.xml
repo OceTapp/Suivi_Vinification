@@ -23,6 +23,7 @@
         android:textSize="18dp"
         android:textAlignment="center"
         android:text="Page d'accueil"
+        android:textColor="#000"
         />
 
     <ImageView

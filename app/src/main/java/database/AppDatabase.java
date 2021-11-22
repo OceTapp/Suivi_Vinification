@@ -25,7 +25,7 @@ import database.entity.CuveEntity;
 public abstract class AppDatabase extends RoomDatabase {
     private static final String TAG = "Database_initialized";
 
-    private static AppDatabase instance;
+    private static AppDatabase INSTANCE;
 
     private static final String DATABASE_NAME = "cuve-database";
 
@@ -37,15 +37,17 @@ public abstract class AppDatabase extends RoomDatabase {
      * Création d'une base de donnée si aucune instance existe
      */
     public static AppDatabase getInstance(final Context context) {
-        if (instance == null) {
+        if (INSTANCE == null) {
             synchronized (AppDatabase.class) {
-                if (instance == null) {
-                    instance = buildDatabase(context.getApplicationContext());
-                    instance.updateDatabaseCreated(context.getApplicationContext());
+                if (INSTANCE == null) {
+                    INSTANCE= Room.databaseBuilder(context.getApplicationContext(),
+                            AppDatabase.class,DATABASE_NAME).build();
+                 //   INSTANCE = buildDatabase(context.getApplicationContext());
+                 //   INSTANCE.updateDatabaseCreated(context.getApplicationContext());
                 }
             }
         }
-        return instance;
+        return INSTANCE;
     }
 
     /**

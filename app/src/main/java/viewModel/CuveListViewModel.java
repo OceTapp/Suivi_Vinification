@@ -34,10 +34,10 @@ public class CuveListViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableCuves.setValue(null);
 
-        LiveData<List<CuveEntity>> clients = repository.getAllCuves(applicationContext);
+        LiveData<List<CuveEntity>> cuves = repository.getAllCuves(applicationContext);
 
         // observe the changes of the entities from the database and forward them
-        observableCuves.addSource(clients, observableCuves::setValue);
+        observableCuves.addSource(cuves, observableCuves::setValue);
     }
 
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
@@ -45,16 +45,16 @@ public class CuveListViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final CuveRepository clientRepository;
+        private final CuveRepository cuveRepository;
 
         public Factory(@NonNull Application application) {
             this.application = application;
-            clientRepository = CuveRepository.getInstance();
+            cuveRepository = CuveRepository.getInstance();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
-            return (T) new CuveListViewModel(application, clientRepository);
+            return (T) new CuveListViewModel(application, cuveRepository);
         }
     }
 

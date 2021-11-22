@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -57,6 +58,8 @@ public class MainActivity extends AppCompatActivity {
                 //Amener sur l'activité paramètre
                 case R.id.main_params:
                     Toast.makeText(this, "Affiche la page paramètre", Toast.LENGTH_SHORT).show();
+                    Intent settingsActivityIntent = new Intent(MainActivity.this, SettingsActivity.class);
+                    startActivity(settingsActivityIntent);
                     return true;
                     //Amener sur l'activité cuve
                 case R.id.main_cuves:

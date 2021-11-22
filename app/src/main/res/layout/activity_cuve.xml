@@ -20,6 +20,7 @@
         android:layout_marginTop="20dp"
         android:textSize="18dp"
         android:textAlignment="center"
+        android:textColor="#000"
         android:text="Cuves"
         />
 
@@ -41,7 +42,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        />
 
 
 </LinearLayout>

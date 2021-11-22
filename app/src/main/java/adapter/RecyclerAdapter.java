@@ -1,14 +1,19 @@
 package adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.suivi_vinification.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,19 +24,25 @@ import viewModel.Cuve;
 /**
  * Recycle la vue pour chaque cuve
  */
+//TODO ARRETER LA RéPARER
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+
     private List<CuveEntity> data;
     private RecyclerViewItemClickListener listener;
-
     /**
      * Avoir une référence pour chaque view
      */
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
-        TextView textView;
-        ViewHolder(TextView textView) {
-            super(textView);
-            this.textView = textView;
+        ImageView mImageView;
+        TextView mPeriod;
+        TextView mCepage;
+
+        public ViewHolder(View itemView) {
+            super(itemView);
+            mImageView = itemView.findViewById(R.id.RecyclerView_ImageView_Card);
+            mPeriod = itemView.findViewById(R.id.RecyclerView_TextView_TitleCard);
+            mCepage = itemView.findViewById(R.id.RecyclerView_TextView_CepageCard);
         }
     }
 
@@ -40,22 +51,25 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        TextView v = (TextView) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.recycler_view, parent, false);
-        final ViewHolder viewHolder = new ViewHolder(v);
-        v.setOnClickListener(view -> listener.onItemClick(view, viewHolder.getAdapterPosition()));
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view, parent
+                ,false);
+        ViewHolder holder = new ViewHolder(v);
+        v.setOnClickListener(view -> listener.onItemClick(view, holder.getAdapterPosition()));
         v.setOnLongClickListener(view -> {
-            listener.onItemLongClick(view, viewHolder.getAdapterPosition());
+            listener.onItemLongClick(view, holder.getAdapterPosition());
             return true;
         });
-        return viewHolder;
+        return holder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
+
         CuveEntity item = data.get(position);
-        holder.textView.setText(item.toString());
+        holder.mCepage.setText(item.getVariety());
+        holder.mPeriod.setText(item.getPeriod());
+
     }
 
     @Override
@@ -88,7 +102,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
                     if (RecyclerAdapter.this.data instanceof CuveEntity) {
                         return (RecyclerAdapter.this.data.get(oldItemPosition)).equals(
-                                (data.get(newItemPosition)).getNumber());
+                                (data.get(newItemPosition)).getId());
                     }
                     return false;
                 }

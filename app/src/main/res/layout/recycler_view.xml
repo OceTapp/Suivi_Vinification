@@ -10,23 +10,24 @@
     >
 
     <ImageView
-        android:id="@+id/CuveActivity_ImageView_Card"
+        android:id="@+id/RecyclerView_ImageView_Card"
         android:layout_width="70dp"
         android:layout_height="70dp"
         android:src="@drawable/cuve3"
         />
 
     <TextView
-        android:id="@+id/CuveActivity_TextView_TitleCard"
+        android:id="@+id/RecyclerView_TextView_TitleCard"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="100dp"
         android:text="Title"
         android:textSize="22dp"
+        android:textColor="#000"
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/CuveActivity_TextView_CepageCard"
+        android:id="@+id/RecyclerView_TextView_CepageCard"
         android:layout_width="wrap_content"
         android:layout_height="30dp"
         android:layout_marginStart="100dp"
@@ -34,17 +35,6 @@
         android:text="Cepage"
         android:textSize="15dp"
         android:textColor="#a9a9a9"
-        />
-
-    <Button
-        android:id="@+id/CuveActivity_Button_Details"
-        android:layout_marginStart="250dp"
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Details"
-        android:textSize="15dp"
-
         />
 
 

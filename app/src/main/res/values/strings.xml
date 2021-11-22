@@ -6,8 +6,7 @@
     <string name="cuve_month">Mois arrivage </string>
     <string name="cuve_color">Couleur du cépage</string>
     <string name="cuve_variety">Cépage de la cuve</string>
-
-
+    <string name="paramètre">Settings</string>
 
 
 </resources>
