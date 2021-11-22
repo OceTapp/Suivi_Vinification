@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Label ordering must match values -->
+    <array name="pref_color_option_labels">
+        <item>@string/color_red</item>
+        <item>@string/color_cyan</item>
+        <item>@string/color_blue</item>
+        <item>@string/color_green</item>
+    </array>
+
+    <array name="pref_color_option_values">
+        <item>@string/color_red_value</item>
+        <item>@string/color_cyan_value</item>
+        <item>@string/color_blue_value</item>
+        <item>@string/color_green_value</item>
+
+    </array>
+</resources>

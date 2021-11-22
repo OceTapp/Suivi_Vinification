@@ -3,7 +3,10 @@ package ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
+import androidx.preference.PreferenceManager;
 
 import com.example.suivi_vinification.R;
 
@@ -19,7 +23,7 @@ import com.example.suivi_vinification.R;
 /**
  * HOME
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private TextView mTitle;
     private ImageView mImage;
@@ -32,7 +36,45 @@ public class MainActivity extends AppCompatActivity {
         this.configureToolBar();
         mTitle = findViewById(R.id.MainActivity_textView_Title);
         mImage = findViewById(R.id.MainActivity_imageView_Image);
+
+        savePreferences();
     }
+
+    private void savePreferences(){
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences.registerOnSharedPreferenceChangeListener(this);
+
+    }
+
+    private void changeTextColor(String pref_color_value) {
+        Log.d("MainActivity", "changeTextColor");
+        switch (pref_color_value) {
+            case "blue":
+                mTitle.setTextColor(Color.BLUE);
+                break;
+            case "green":
+                mTitle.setTextColor(Color.GREEN);
+                break;
+            case "red":
+                mTitle.setTextColor(Color.RED);
+                break;
+            case "pink":
+                mTitle.setTextColor(Color.CYAN);
+                break;
+            default:
+                mTitle.setTextColor(Color.BLACK);
+        }
+    }
+    private void loadColorFromPreference(SharedPreferences sharedPreferences) {
+        Log.d("MainActivity",sharedPreferences.getString(getString(R.string.color_key),"R.string.color_green_value"));
+        changeTextColor(sharedPreferences.getString(getString(R.string.color_key),getString(R.string.color_green_value)));
+    }
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+        loadColorFromPreference(sharedPreferences);
+
+        }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -73,5 +115,6 @@ public class MainActivity extends AppCompatActivity {
             }
 
     }
+
 
          }
