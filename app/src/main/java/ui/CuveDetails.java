@@ -2,16 +2,22 @@ package ui;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.preference.PreferenceManager;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +46,8 @@ public class CuveDetails extends AppCompatActivity {
     private Button mDelete;
     private Button mFollow;
 
+    private LinearLayout mLayoutPref;
+
     Boolean status;
 
     private CuveEntity cuve;
@@ -50,15 +58,21 @@ public class CuveDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuve_details);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
         mTitle = findViewById(R.id.CuveActivity_details_textView_Title);
         mModifie = findViewById(R.id.CuveActivity_details_button_Change);
         mDelete = findViewById(R.id.CuveActivity_details_button_Delete);
         mFollow = findViewById(R.id.CuveActivity_details_button_Follow);
+        mLayoutPref = findViewById(R.id.CuveActivity_Details_Layout);
+
+
 
         //  int number = getIntent().getIntExtra("CuveNumber",cuve.getNumber());
         //récupérer donnée de cuveActivité
         number = getIntent().getIntExtra("cuveNumber", 0);
-
+        Load_setting();
         initiateView();
 
         CuveViewModel.Factory factory = new CuveViewModel.Factory(getApplication(), number);
@@ -130,6 +144,40 @@ public class CuveDetails extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //On sérialise le menu afin de l'ajouter à la bar
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    //qu'est-ce qui se passe quand on choisi l'une des options de la toolbar
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //3 - Handle actions on menu items
+        switch (item.getItemId()) {
+            //Amener sur l'activité paramètre
+            case R.id.main_params:
+                Toast.makeText(this, "Affiche la page paramètre", Toast.LENGTH_SHORT).show();
+                Intent settingsActivityIntent = new Intent(CuveDetails.this, SettingsActivity.class);
+                startActivity(settingsActivityIntent);
+                return true;
+            //Amener sur l'activité cuve
+            case R.id.main_cuves:
+                Intent cuveActivityIntent = new Intent(CuveDetails.this, CuveActivity.class);
+                startActivity(cuveActivityIntent);
+
+                return true;
+            case R.id.main_home:
+                Intent homeActivityIntent = new Intent(CuveDetails.this, MainActivity.class);
+                startActivity(homeActivityIntent);
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
 
     /**
      * Initialise la base de donnée et rends les champs non éditable
@@ -240,5 +288,22 @@ public class CuveDetails extends AppCompatActivity {
                 Log.d("CuveDetails", "createClient: failure", e);
             }
         });
+    }
+    private void Load_setting() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean theme = sp.getBoolean("theme_preference", false);
+        if (theme) {
+            mLayoutPref.setBackgroundColor(Color.parseColor("#000000"));
+            mTitle.setTextColor(Color.parseColor("#ffffff"));
+
+        } else {
+            mLayoutPref.setBackgroundColor(Color.parseColor("#ffffff"));
+            mTitle.setTextColor(Color.parseColor("#000000"));
+        }
+    }
+    @Override
+    protected void onResume() {
+        Load_setting();
+        super.onResume();
     }
 }

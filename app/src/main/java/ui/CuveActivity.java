@@ -2,39 +2,34 @@ package ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.database.Cursor;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
-import android.widget.SimpleCursorAdapter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.suivi_vinification.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import adapter.RecyclerAdapter;
-import database.AppDatabase;
-import database.async.CreateCuve;
-import database.dao.CuveDao;
 import database.entity.CuveEntity;
-import database.util.OnAsyncEventListener;
 import util.RecyclerViewItemClickListener;
-import viewModel.Cuve;
 import viewModel.CuveListViewModel;
 import viewModel.CuveViewModel;
 
@@ -47,21 +42,25 @@ public class CuveActivity extends AppCompatActivity {
     private Button mButton_Ajouter;
     private RecyclerView mView;
     private RecyclerAdapter recyclerAdapter;
+    private LinearLayout mLayout;
 
     private List<CuveEntity> cuves;
     private CuveListViewModel mViewListModel;
-    private CuveEntity cuve;
-    private CuveViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuve);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         mTitle = findViewById(R.id.CuveActivity_textView_Title);
         mButton_Ajouter = findViewById(R.id.CuveActivity_button_Ajouter);
         mView = findViewById(R.id.cuvesRecyclerView);
+        mLayout = findViewById(R.id.CuveActivity_Layout);
+
+        Load_setting();
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         mView.setLayoutManager(layoutManager);
@@ -116,6 +115,52 @@ public class CuveActivity extends AppCompatActivity {
                 startActivity(cuveActivityIntent);
             }
         });
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        //On sérialise le menu afin de l'ajouter à la bar
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        menu.getItem(1).setVisible(false);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        //3 - Handle actions on menu items
+        switch (item.getItemId()) {
+            case R.id.main_params:
+                Intent settingsActivityIntent = new Intent(CuveActivity.this, SettingsActivity.class);
+                startActivity(settingsActivityIntent);
+                return true;
+            case R.id.main_home:
+                Intent homeActivityIntent = new Intent(CuveActivity.this, MainActivity.class);
+                startActivity(homeActivityIntent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+    private void Load_setting() {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean theme = sp.getBoolean("theme_preference", false);
+        if (theme) {
+            mLayout.setBackgroundColor(Color.parseColor("#000000"));
+            mTitle.setTextColor(Color.parseColor("#ffffff"));
+
+        } else {
+            mLayout.setBackgroundColor(Color.parseColor("#ffffff"));
+            mTitle.setTextColor(Color.parseColor("#000000"));
+
+        }
+    }
+    @Override
+    protected void onResume() {
+        Load_setting();
+        super.onResume();
     }
 }
 

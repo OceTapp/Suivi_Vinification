@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "com.example.suivi_vinification"
@@ -45,7 +45,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.4.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
-    implementation 'com.takisoft.fix:preference-v7:25.3.0.0'
 
     def room_version = "2.3.0"
     implementation "androidx.room:room-runtime:$room_version"

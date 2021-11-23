@@ -1,25 +1,21 @@
 package adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.suivi_vinification.R;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import database.entity.CuveEntity;
 import util.RecyclerViewItemClickListener;
-import viewModel.Cuve;
 
 /**
  * Recycle la vue pour chaque cuve
@@ -29,6 +25,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     private List<CuveEntity> data;
     private RecyclerViewItemClickListener listener;
+
     /**
      * Avoir une référence pour chaque view
      */
@@ -43,6 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             mImageView = itemView.findViewById(R.id.RecyclerView_ImageView_Card);
             mPeriod = itemView.findViewById(R.id.RecyclerView_TextView_TitleCard);
             mCepage = itemView.findViewById(R.id.RecyclerView_TextView_CepageCard);
+
         }
     }
 
@@ -51,9 +49,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view, parent
-                ,false);
+                , false);
         ViewHolder holder = new ViewHolder(v);
         v.setOnClickListener(view -> listener.onItemClick(view, holder.getAdapterPosition()));
         v.setOnLongClickListener(view -> {
@@ -123,4 +121,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             result.dispatchUpdatesTo(this);
         }
     }
+
+
 }
