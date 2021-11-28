@@ -7,6 +7,10 @@ import database.AppDatabase;
 import database.entity.CuveEntity;
 import database.util.OnAsyncEventListener;
 
+/**
+ * @author oceane
+ * Suppression d'une cuve
+ */
 public class DeleteCuve extends AsyncTask<CuveEntity, Void, Void> {
     private AppDatabase database;
     private OnAsyncEventListener callback;

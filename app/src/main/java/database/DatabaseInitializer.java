@@ -7,6 +7,7 @@ import android.util.Log;
 import database.entity.CuveEntity;
 
 /**
+ * @author oceane
  * Initialiser la base de donnée
  */
 public class DatabaseInitializer {
@@ -22,6 +23,9 @@ public class DatabaseInitializer {
         task.execute();
     }
 
+    /**
+     * ajout des cuves dans la base de donnée
+     */
     private static void addCuve(final AppDatabase db, final int number, final int volume, final String period, final String color, final String variety) {
         CuveEntity cuve = new CuveEntity(number, volume, period, color, variety);
         db.cuveDao().insert(cuve);
@@ -34,7 +38,6 @@ public class DatabaseInitializer {
         addCuve(db,4, 200,"septembre","rouge","humagne rouge");
         addCuve(db,6, 150,"novembre","rouge","syrah");
         addCuve(db,8, 300,"septembre","blanc","pinot blanc");
-       // addCuve(db,10, 300,"septembre","blanc","fendant");
 
     }
 
@@ -54,6 +57,5 @@ public class DatabaseInitializer {
             populateWithTestData(database);
             return null;
         }
-//cc
 }
 }

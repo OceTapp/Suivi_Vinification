@@ -41,16 +41,13 @@ public class CuveRepository {
     }
 
 
-    //Méthode qui liste l'ensemble des cuves en utilisant la requête indiqué dans DAO
+    /**
+     * Liste l'ensemble des cuves en utilisant la requête getAllCuves de la DAO
+     */
     public LiveData<List<CuveEntity>> getAllCuves(Context context) {
         return AppDatabase.getInstance(context).cuveDao().getAllCuves();
     }
 
-    /**
-     * @param cuve : entité cuve
-     * @param callback : indique si l'évènement est réussi ou non
-     * @param context : regarde si le contexte est juste
-     */
     public void insert(final CuveEntity cuve, OnAsyncEventListener callback, Context context) {
         new CreateCuve(context, callback).execute(cuve);
     }

@@ -22,7 +22,8 @@ import com.example.suivi_vinification.R;
 
 
 /**
- * HOME
+ * @author oceane
+ * Page d'accueil de l'application
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView mTitle;
     private ImageView mImage;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,14 @@ public class MainActivity extends AppCompatActivity {
         Load_setting();
 
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
+    /**
+     * Affichage en fonction de configuration indiqué par l'utilisateur
+     */
     private void Load_setting(){
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         boolean theme = sp.getBoolean("theme_preference", false);
@@ -64,6 +71,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sérialisation du menu afin de l'ajouter à la toolbar
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         //On sérialise le menu afin de l'ajouter à la bar
@@ -73,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**
+     * En fonction de l'item sélectionné dans la toolbar, on se dirige sur une autre activité
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
             switch (item.getItemId()) {
@@ -95,5 +108,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         Load_setting();
         super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }

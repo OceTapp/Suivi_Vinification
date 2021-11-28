@@ -15,10 +15,8 @@ import database.repository.CuveRepository;
 import database.util.OnAsyncEventListener;
 
 /**
- * Utiliser pour montrer les détails d'une cuve
- * 1. observe les objets
- * 2. pattern factory
- * 3. Appel les méthodes de repository
+ * @author oceane
+ * Stocker et gérer les détails d'une cuve
  */
 public class CuveViewModel extends AndroidViewModel {
 
@@ -47,10 +45,7 @@ public class CuveViewModel extends AndroidViewModel {
         observableCuve.addSource(cuve, observableCuve::setValue);
     }
 
-    /**
-     * A COMPRENDRE (Pattern factory)
-     * A creator is used to inject the account id into the ViewModel
-     */
+
     public static class Factory extends ViewModelProvider.NewInstanceFactory {
 
         @NonNull
@@ -73,9 +68,6 @@ public class CuveViewModel extends AndroidViewModel {
         }
     }
 
-    /**
-     * Expose the LiveData ClientEntity query so the UI can observe it.
-     */
     public LiveData<CuveEntity> getCuve() {
         return observableCuve;
     }

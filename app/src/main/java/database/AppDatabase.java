@@ -18,6 +18,7 @@ import database.entity.CuveEntity;
 
 
 /**
+ * @author oceane
  * Création d'un thread qui exécute une nouvelle instance de base de donnée
  */
 @Database(entities = {CuveEntity.class}, version = 1)
@@ -42,8 +43,6 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE= Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class,DATABASE_NAME).build();
-                 //   INSTANCE = buildDatabase(context.getApplicationContext());
-                 //   INSTANCE.updateDatabaseCreated(context.getApplicationContext());
                 }
             }
         }
@@ -52,9 +51,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     /**
      * Création d'un thread qui exécute une nouvelle instance de base de donnée
-     * Build the database. only sets up the database configuration and
-     * creates a new instance of the database.
-     * The SQLite database is only created when it's accessed for the first time.
      */
     private static AppDatabase buildDatabase(final Context appContext) {
         Log.i(TAG, "Database will be initialized.");
@@ -84,11 +80,4 @@ public abstract class AppDatabase extends RoomDatabase {
         private void setDatabaseCreated() {
             isDatabaseCreated.postValue(true);
         }
-
-        public LiveData<Boolean> getDatabaseCreated() {
-            return isDatabaseCreated;
-        }
-    }
-
-
-
+}

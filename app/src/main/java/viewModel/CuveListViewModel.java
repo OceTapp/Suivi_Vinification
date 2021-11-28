@@ -15,6 +15,10 @@ import java.util.List;
 import database.entity.CuveEntity;
 import database.repository.CuveRepository;
 
+/**
+ * @author oceane
+ * Stocker et gérer les données liés à la liste des cuves
+ */
 public class CuveListViewModel extends AndroidViewModel {
 
     private CuveRepository repository;

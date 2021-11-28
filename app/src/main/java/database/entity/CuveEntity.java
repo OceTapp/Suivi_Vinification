@@ -9,7 +9,8 @@ import androidx.room.PrimaryKey;
 import java.util.Objects;
 
 /**
- * Nouvelle entitée avec le nom de table et les colonnes
+ * @author oceane
+ * Création d'une table nommée cuve et de ses colonnes
  */
 @Entity(tableName = "cuves")
 public class CuveEntity {
@@ -36,7 +37,6 @@ public class CuveEntity {
         @Ignore
         public CuveEntity() {
         }
-
 
         public CuveEntity(int number, int volume, String period, String color, String variety) {
             this.number = number;
@@ -109,5 +109,3 @@ public class CuveEntity {
             return number + " " + variety;
         }
     }
-
-

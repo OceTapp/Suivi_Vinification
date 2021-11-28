@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
     <PreferenceCategory
-        android:title="General">
+        android:title="Général">
     <SwitchPreference
         android:key="theme_preference"
         android:defaultValue="false"
@@ -9,13 +10,15 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:title="About">
+        android:title="A propos">
         <Preference
             android:title="Version"
-            android:summary="1.0.0.0"/>
+            android:summary="1.0"/>
         <Preference
             android:key="contact_preference"
-            android:title="About Me"/>
+            android:title="A propos"
+            android:summary="Application android répertoriant les cuves afin de faciliter leur gestion et leurs suivis "
+            />
 
     </PreferenceCategory>
 </PreferenceScreen>

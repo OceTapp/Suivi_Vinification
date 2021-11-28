@@ -7,6 +7,10 @@ import database.AppDatabase;
 import database.entity.CuveEntity;
 import database.util.OnAsyncEventListener;
 
+/**
+ * @author oceane
+ * Création d'une cuve
+ */
 public class CreateCuve extends AsyncTask<CuveEntity, Void, Void> {
 
         private AppDatabase database;

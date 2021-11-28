@@ -17,10 +17,11 @@ import java.util.Objects;
 import database.entity.CuveEntity;
 import util.RecyclerViewItemClickListener;
 
+
 /**
- * Recycle la vue pour chaque cuve
+ * @author oceane
+ * Recycle la view activity_cuve
  */
-//TODO ARRETER LA RéPARER
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
 
     private List<CuveEntity> data;
@@ -32,13 +33,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
     public static class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
         ImageView mImageView;
-        TextView mPeriod;
+        TextView mNumber;
         TextView mCepage;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.RecyclerView_ImageView_Card);
-            mPeriod = itemView.findViewById(R.id.RecyclerView_TextView_TitleCard);
+            mNumber = itemView.findViewById(R.id.RecyclerView_TextView_TitleCard);
             mCepage = itemView.findViewById(R.id.RecyclerView_TextView_CepageCard);
 
         }
@@ -48,6 +49,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         this.listener = listener;
     }
 
+    /**
+     * Création de nouvelles vues si non existante
+     */
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view, parent
@@ -61,12 +65,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
         return holder;
     }
 
+    /**
+     * Réutilisation automatique des vues
+     */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
         CuveEntity item = data.get(position);
         holder.mCepage.setText(item.getVariety());
-        holder.mPeriod.setText(item.getPeriod());
+        holder.mNumber.setText(String.valueOf(item.getNumber()));
 
     }
 
@@ -112,7 +119,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                         CuveEntity oldClient = RecyclerAdapter.this.data.get(newItemPosition);
                         return Objects.equals(newClient.getNumber(), oldClient.getNumber())
                                 && Objects.equals(newClient.getVariety(), oldClient.getVariety());
-
                     }
                     return false;
                 }
@@ -121,6 +127,4 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             result.dispatchUpdatesTo(this);
         }
     }
-
-
 }

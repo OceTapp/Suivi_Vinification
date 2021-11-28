@@ -7,6 +7,10 @@ import database.AppDatabase;
 import database.entity.CuveEntity;
 import database.util.OnAsyncEventListener;
 
+/**
+ * @author oceane
+ * Mise à jour d'une cuve
+ */
 public class UpdateCuve extends AsyncTask<CuveEntity, Void, Void> {
     private AppDatabase database;
     private OnAsyncEventListener callback;

@@ -8,6 +8,7 @@ import android.icu.text.CaseMap;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.SwitchPreference;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -18,6 +19,11 @@ import androidx.preference.PreferenceManager;
 
 import com.example.suivi_vinification.R;
 
+/**
+ * @author oceane
+ * Configuration de l'application
+ * Permet d'indiquer si on veut utiliser le dark mode ou le light mode
+ */
 public class SettingsActivity extends PreferenceActivity {
 
     @Override
@@ -26,9 +32,11 @@ public class SettingsActivity extends PreferenceActivity {
         addPreferencesFromResource(R.xml.settings_pref);
 
         Load_setting();
-
     }
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     private void Load_setting() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
@@ -41,6 +49,7 @@ public class SettingsActivity extends PreferenceActivity {
 
         android.preference.SwitchPreference night = (SwitchPreference) findPreference("theme_preference");
         night.setOnPreferenceChangeListener(new android.preference.Preference.OnPreferenceChangeListener() {
+
             @Override
             public boolean onPreferenceChange(android.preference.Preference preference, Object obj) {
 
@@ -51,41 +60,19 @@ public class SettingsActivity extends PreferenceActivity {
 
                 } else {
                     getListView().setBackgroundColor(Color.parseColor("#ffffff"));
-
                 }
                 return true;
             }
         });
     }
-
-
     @Override
     protected void onResume() {
         Load_setting();
         super.onResume();
     }
 
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //3 - Handle actions on menu items
-        switch (item.getItemId()) {
-            //Amener sur l'activité paramètre
-            case R.id.main_params:
-                Toast.makeText(this, "Affiche la page paramètre", Toast.LENGTH_SHORT).show();
-                Intent settingsActivityIntent = new Intent(SettingsActivity.this, MainActivity.class);
-                startActivity(settingsActivityIntent);
-                return true;
-            //Amener sur l'activité cuve
-            case R.id.main_cuves:
-                Toast.makeText(this, "Affiche l'activité des cuves", Toast.LENGTH_SHORT).show();
-                Intent cuveActivityIntent = new Intent(SettingsActivity.this, CuveActivity.class);
-                startActivity(cuveActivityIntent);
-
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-
+    protected void onStop() {
+        super.onStop();
     }
 }

@@ -14,10 +14,10 @@ import java.util.List;
 import database.entity.CuveEntity;
 
 /**
+ * @author oceane
  * Data Access Object
  * Requête SQL pour accéder aux données
  */
-
 @Dao
 public interface CuveDao {
 
@@ -41,4 +41,3 @@ public interface CuveDao {
     void deleteAll();
 
 }
-

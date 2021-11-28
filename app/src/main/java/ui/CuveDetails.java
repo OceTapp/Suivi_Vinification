@@ -3,6 +3,9 @@ package ui;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
@@ -25,38 +28,50 @@ import com.example.suivi_vinification.R;
 import com.google.android.material.textfield.TextInputEditText;
 
 import database.entity.CuveEntity;
+import database.fragment.DetailsCuveFragment;
+import database.fragment.SuiviCuveFragment;
 import database.util.OnAsyncEventListener;
 import viewModel.CuveViewModel;
 
 /**
- * Affiche les détails d'une cuve
+ * @author oceane
+ * Permet d'accéder aux classes DetailsCuveFragment et SuiviCuveFragment
+ * Récupérer les données de la cuve sélectionnée en amont
  */
 public class CuveDetails extends AppCompatActivity {
 
-    private boolean Editable;
-
     private TextView mTitle;
-    private TextInputEditText mNumber;
-    private TextInputEditText mVolume;
-    private TextInputEditText mPeriod;
-    private TextInputEditText mColor;
-    private TextInputEditText mVariety;
     private int number;
     private Button mModifie;
     private Button mDelete;
-    private Button mFollow;
 
     private LinearLayout mLayoutPref;
 
-    Boolean status;
-
-    private CuveEntity cuve;
-    private CuveViewModel mViewModel;
+    private Button mCuveSuiviFragment;
+    private Button mCuveDetailsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cuve_details);
+
+        mCuveSuiviFragment = findViewById(R.id.CuveeActivity_Button_SuiviCuve);
+        mCuveDetailsFragment = findViewById(R.id.CuveeActivity_Button_DetailsCuve);
+
+        mCuveSuiviFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new SuiviCuveFragment());
+
+            }
+        });
+
+        mCuveDetailsFragment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragment(new DetailsCuveFragment());
+            }
+        });
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -64,95 +79,25 @@ public class CuveDetails extends AppCompatActivity {
         mTitle = findViewById(R.id.CuveActivity_details_textView_Title);
         mModifie = findViewById(R.id.CuveActivity_details_button_Change);
         mDelete = findViewById(R.id.CuveActivity_details_button_Delete);
-        mFollow = findViewById(R.id.CuveActivity_details_button_Follow);
         mLayoutPref = findViewById(R.id.CuveActivity_Details_Layout);
 
-
-
-        //  int number = getIntent().getIntExtra("CuveNumber",cuve.getNumber());
-        //récupérer donnée de cuveActivité
         number = getIntent().getIntExtra("cuveNumber", 0);
-        Load_setting();
-        initiateView();
-
-        CuveViewModel.Factory factory = new CuveViewModel.Factory(getApplication(), number);
-        mViewModel = ViewModelProviders.of(this, factory).get(CuveViewModel.class);
-        mViewModel.getCuve().observe(this, cuveEntity -> {
-            if (cuveEntity != null) {
-                cuve = cuveEntity;
-                updateContent();
-            }
-
-        });
         if(number == 0){
-            Editable = true;
-            initiateView();
-            mModifie.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    createCuve(Integer.parseInt(String.valueOf(mNumber.getText())),
-                            Integer.parseInt(String.valueOf(mVolume.getText())),
-                            mPeriod.getText().toString(),
-                            mColor.getText().toString(),
-                            mVariety.getText().toString());
-                }
-            });
+            replaceFragment(new DetailsCuveFragment());
+            mCuveSuiviFragment.setVisibility(View.INVISIBLE);
+            mCuveDetailsFragment.setVisibility(View.INVISIBLE);
         }
-        if(number != 0) {
-            mModifie.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mModifie.getText().equals("Modifier")) {
-                        Editable = true;
-                        initiateView();
-                        mModifie.setText("Valider");
-                    } else {
-                        saveChanges(Integer.parseInt(String.valueOf(mNumber.getText())),
-                                Integer.parseInt(String.valueOf(mVolume.getText())),
-                                mPeriod.getText().toString(),
-                                mColor.getText().toString(),
-                                mVariety.getText().toString());
-                        Editable = false;
-                        mModifie.setText("Modifier");
-                    }
-                }
-            });
-        }
-
-
-
-        mDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-              mViewModel.deleteCuve(cuve, new OnAsyncEventListener() {
-                  @Override
-                  public void onSuccess() {
-                      Log.d("CuveDetails", "delete:success");
-                      onBackPressed();
-                  }
-
-                  @Override
-                  public void onFailure(Exception e) {
-                      Log.d("CuveDetails", "delete:fail");
-
-                  }
-              });
-
-
-
-            }
-        });
     }
-
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        //On sérialise le menu afin de l'ajouter à la bar
         getMenuInflater().inflate(R.menu.menu_toolbar, menu);
         return true;
     }
-
-    //qu'est-ce qui se passe quand on choisi l'une des options de la toolbar
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -180,116 +125,16 @@ public class CuveDetails extends AppCompatActivity {
     }
 
     /**
-     * Initialise la base de donnée et rends les champs non éditable
+     * Permet d'afficher un autre fragment
      */
-    private void initiateView() {
-
-        if (Editable == false) {
-
-            mNumber = findViewById(R.id.CuveActivity_Details_TextInputEdit_Number);
-            mVolume = findViewById(R.id.CuveActivity_Details_TextInputEdit_Volume);
-            mPeriod = findViewById(R.id.CuveActivity_Details_TextInputEdit_Period);
-            mColor = findViewById(R.id.CuveActivity_Details_TextInputEdit_Color);
-            mVariety = findViewById(R.id.CuveActivity_Details_TextInputEdit_Variety);
-
-            mNumber.setFocusable(false);
-            mNumber.setEnabled(false);
-            mVolume.setFocusable(false);
-            mVolume.setEnabled(false);
-            mPeriod.setFocusable(false);
-            mPeriod.setEnabled(false);
-            mColor.setFocusable(false);
-            mColor.setEnabled(false);
-            mVariety.setFocusable(false);
-            mVariety.setEnabled(false);
-
-            mModifie.setText("Modifier");
-        } else {
-            mNumber.setFocusable(true);
-            mNumber.setEnabled(true);
-            mVolume.setFocusable(true);
-            mVolume.setEnabled(true);
-            mPeriod.setFocusable(true);
-            mPeriod.setEnabled(true);
-            mColor.setFocusable(true);
-            mColor.setEnabled(true);
-            mVariety.setFocusable(true);
-            mVariety.setEnabled(true);
-
-            mModifie.setText("Valider");
-        }
-
+    public void replaceFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment, fragment);
+        fragmentTransaction.commit();
     }
 
-    /**
-     * Met à jour les champs en fonction des données de la cuve
-     */
-    private void updateContent() {
-        if (cuve != null) {
-            mNumber.setText(String.valueOf(cuve.getNumber()));
-            mVolume.setText(String.valueOf(cuve.getVolume()));
-            mPeriod.setText(cuve.getPeriod());
-            mColor.setText(cuve.getColor());
-            mVariety.setText(cuve.getVariety());
-        }
-    }
-
-    private void saveChanges(int number, int volume, String period, String color, String variety) {
-        cuve.setNumber(number);
-        cuve.setVolume(volume);
-        cuve.setPeriod(period);
-        cuve.setColor(color);
-        cuve.setVariety(variety);
-
-        mViewModel.updateCuve(cuve, new OnAsyncEventListener() {
-            @Override
-            public void onSuccess() {
-                Log.d("CuveDetails", "updateClient: success");
-                status = true;
-                status();
-                onBackPressed();
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                Log.d("CuveDetails", "updateClient: success");
-                status = false;
-                status();
-
-            }
-        });
-    }
-
-    private void status() {
-        if (status == true) {
-            Toast.makeText(this, "informations mises à jour", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Les informations n'ont pas été mises à jour", Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void createCuve(int number, int volume, String period, String color, String variety){
-        cuve = new CuveEntity();
-        cuve.setNumber(number);
-        cuve.setVolume(volume);
-        cuve.setPeriod(period);
-        cuve.setColor(color);
-        cuve.setVariety(variety);
-
-        mViewModel.createCuve(cuve, new OnAsyncEventListener() {
-            @Override
-            public void onSuccess() {
-                Log.d("CuveActvity", "createClient: success");
-                onBackPressed();
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                Log.d("CuveDetails", "createClient: failure", e);
-            }
-        });
-    }
-    private void Load_setting() {
+        private void Load_setting() {
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         boolean theme = sp.getBoolean("theme_preference", false);
         if (theme) {
@@ -305,5 +150,10 @@ public class CuveDetails extends AppCompatActivity {
     protected void onResume() {
         Load_setting();
         super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }

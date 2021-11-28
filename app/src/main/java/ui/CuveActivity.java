@@ -19,22 +19,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.suivi_vinification.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import adapter.RecyclerAdapter;
 import database.entity.CuveEntity;
+import database.fragment.DetailsCuveFragment;
+import database.fragment.SuiviCuveFragment;
 import util.RecyclerViewItemClickListener;
 import viewModel.CuveListViewModel;
-import viewModel.CuveViewModel;
 
 /**
- * AFFICHE LA LISTE DES CUVES
+ * @author oceane
+ * Affiche la liste des cuves en utilisant la class RecylcerAdapter
  */
 public class CuveActivity extends AppCompatActivity {
 
@@ -86,7 +86,6 @@ public class CuveActivity extends AppCompatActivity {
 
                 //transmettre les données à une nouvelle activité
                 intent.putExtra("cuveNumber", cuves.get(position).getNumber());
-                //intent.putExtra("cuveVariety", cuves.get(position).getVariety());
                 startActivity(intent);
             }
 
@@ -111,12 +110,16 @@ public class CuveActivity extends AppCompatActivity {
         mButton_Ajouter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent cuveActivityIntent = new Intent(CuveActivity.this,CuveDetails.class);
+                Intent cuveActivityIntent = new Intent(CuveActivity.this, CuveDetails.class);
                 startActivity(cuveActivityIntent);
             }
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -162,5 +165,9 @@ public class CuveActivity extends AppCompatActivity {
         Load_setting();
         super.onResume();
     }
-}
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+}
