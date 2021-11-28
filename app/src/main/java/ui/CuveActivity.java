@@ -27,8 +27,6 @@ import java.util.List;
 
 import adapter.RecyclerAdapter;
 import database.entity.CuveEntity;
-import database.fragment.DetailsCuveFragment;
-import database.fragment.SuiviCuveFragment;
 import util.RecyclerViewItemClickListener;
 import viewModel.CuveListViewModel;
 

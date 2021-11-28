@@ -1,21 +1,16 @@
 package ui;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.ViewModel;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,13 +20,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.suivi_vinification.R;
-import com.google.android.material.textfield.TextInputEditText;
 
-import database.entity.CuveEntity;
-import database.fragment.DetailsCuveFragment;
-import database.fragment.SuiviCuveFragment;
-import database.util.OnAsyncEventListener;
-import viewModel.CuveViewModel;
+import fragment.DetailsCuveFragment;
+import fragment.SuiviCuveFragment;
 
 /**
  * @author oceane

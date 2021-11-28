@@ -1,4 +1,4 @@
-package database.fragment;
+package fragment;
 
 import android.os.Bundle;
 
