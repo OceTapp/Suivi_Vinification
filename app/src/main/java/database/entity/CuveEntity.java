@@ -17,7 +17,8 @@ import java.util.Objects;
 @Entity(tableName = "cuves")
 public class CuveEntity {
 
-        private int id;
+        @PrimaryKey(autoGenerate = true)
+        private Long id;
 
         @ColumnInfo(name = "numero")
         private int number;
@@ -46,12 +47,11 @@ public class CuveEntity {
             this.color = color;
             this.variety = variety;
         }
+        public Long getId(){
+            return id;
+        }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
