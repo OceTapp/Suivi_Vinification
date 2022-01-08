@@ -17,7 +17,7 @@ import java.util.Objects;
 @Entity(tableName = "cuves")
 public class CuveEntity {
 
-        private int id;
+        private Long id;
 
         @ColumnInfo(name = "numero")
         private int number;
@@ -47,9 +47,11 @@ public class CuveEntity {
             this.variety = variety;
         }
 
-   "hello"
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
