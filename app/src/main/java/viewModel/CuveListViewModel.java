@@ -23,8 +23,6 @@ public class CuveListViewModel extends AndroidViewModel {
 
     private CuveRepository repository;
 
-    private Context applicationContext;
-
     private final MediatorLiveData<List<CuveEntity>> observableCuves;
 
     public CuveListViewModel(@NonNull Application application, CuveRepository cuveRepository) {
@@ -32,13 +30,11 @@ public class CuveListViewModel extends AndroidViewModel {
 
         repository = cuveRepository;
 
-        applicationContext = application.getApplicationContext();
-
         observableCuves = new MediatorLiveData<>();
         // set by default null, until we get data from the database.
         observableCuves.setValue(null);
 
-        LiveData<List<CuveEntity>> cuves = repository.getAllCuves(applicationContext);
+        LiveData<List<CuveEntity>> cuves = repository.getAllCuves();
 
         // observe the changes of the entities from the database and forward them
         observableCuves.addSource(cuves, observableCuves::setValue);

@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey;
 
 import com.google.firebase.database.Exclude;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -47,6 +49,7 @@ public class CuveEntity {
             this.variety = variety;
         }
 
+        @Exclude
     public Long getId() {
         return id;
     }
@@ -109,4 +112,17 @@ public class CuveEntity {
         public String toString() {
             return number + " " + variety;
         }
-    }
+
+        //Use for updated
+        @Exclude
+        public Map<String, Object> toMap() {
+            HashMap<String, Object> result = new HashMap<>();
+            result.put("number", number);
+            result.put("volume", volume);
+            result.put("period", period);
+            result.put("color", color);
+            result.put("variety", variety);
+            return result;
+        }
+
+}

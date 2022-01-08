@@ -22,8 +22,6 @@ public class CuveViewModel extends AndroidViewModel {
 
     private CuveRepository repository;
 
-    private Context applicationContext;
-
     // MediatorLiveData observe le comportement des données et réagit en conséquence
     private final MediatorLiveData<CuveEntity> observableCuve;
 
@@ -33,13 +31,11 @@ public class CuveViewModel extends AndroidViewModel {
 
         repository = cuveRepository;
 
-        applicationContext = application.getApplicationContext();
-
         observableCuve = new MediatorLiveData<>();
         // set by default null, until we get data from the database.
         observableCuve.setValue(null);
 
-        LiveData<CuveEntity> cuve = repository.getCuve(applicationContext,number);
+        LiveData<CuveEntity> cuve = repository.getCuve(number);
 
         // observe the changes of the cuve entity from the database and forward them
         observableCuve.addSource(cuve, observableCuve::setValue);
@@ -73,14 +69,14 @@ public class CuveViewModel extends AndroidViewModel {
     }
 
     public void createCuve(CuveEntity cuve, OnAsyncEventListener callback) {
-        repository.insert(cuve, callback, applicationContext);
+        repository.insert(cuve, callback);
     }
 
     public void updateCuve(CuveEntity cuve, OnAsyncEventListener callback) {
-        repository.update(cuve, callback, applicationContext);
+        repository.update(cuve, callback);
     }
 
     public void deleteCuve(CuveEntity cuve, OnAsyncEventListener callback) {
-        repository.delete(cuve, callback, applicationContext);
+        repository.delete(cuve, callback);
     }
 }
