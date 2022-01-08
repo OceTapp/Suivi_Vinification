@@ -6,6 +6,8 @@ import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
+import com.google.firebase.database.Exclude;
+
 import java.util.Objects;
 
 /**
@@ -15,8 +17,7 @@ import java.util.Objects;
 @Entity(tableName = "cuves")
 public class CuveEntity {
 
-        @PrimaryKey(autoGenerate = true)
-        private Long id;
+        private int id;
 
         @ColumnInfo(name = "numero")
         private int number;
@@ -46,11 +47,11 @@ public class CuveEntity {
             this.variety = variety;
         }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
