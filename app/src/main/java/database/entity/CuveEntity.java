@@ -47,9 +47,7 @@ public class CuveEntity {
             this.variety = variety;
         }
 
-    public int getId() {
-        return id;
-    }
+   "hello"
 
     public void setId(int id) {
         this.id = id;
