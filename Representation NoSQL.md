@@ -1,4 +1,4 @@
-# Strcture
+# Structure
 Cuves
 « nom entité » : {
 	« *_id » 	: ObjectifID
