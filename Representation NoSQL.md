@@ -1,3 +1,4 @@
+(pour une meilleure lisbilité, cliquer sur "raw" en haut à droite)
 # Structure
 Cuves
 « nom entité » : {
