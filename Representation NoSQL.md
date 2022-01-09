@@ -1,4 +1,4 @@
-Strcture
+# Strcture
 Cuves
 « nom entité » : {
 	« *_id » 	: ObjectifID
@@ -9,7 +9,7 @@ Cuves
 	« variety » 	: String 
 }
 
-Exemple
+# Exemple
 Cuves
 “cuves” : {
 	{cuveId1} : { 	
