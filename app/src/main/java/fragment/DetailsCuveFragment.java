@@ -47,7 +47,6 @@ public class DetailsCuveFragment extends Fragment {
     private TextInputEditText mColor;
     private TextInputEditText mVariety;
     private int number;
-    private String cuveId;
     private Button mModifie;
     private Button mDelete;
 
