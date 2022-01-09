@@ -16,45 +16,24 @@ import java.util.Objects;
  * @author oceane
  * Création d'une table nommée cuve et de ses colonnes
  */
-@Entity(tableName = "cuves")
 public class CuveEntity {
 
-        private Long id;
-
-        @ColumnInfo(name = "numero")
+        private String id;
         private int number;
-
-        @ColumnInfo(name = "volume")
         private int volume;
-
-        @ColumnInfo(name = "mois")
         private String period;
-
-        @ColumnInfo(name = "couleur")
         private String color;
-
-        @ColumnInfo(name = "cepage")
         private String variety;
 
-
-        @Ignore
         public CuveEntity() {
         }
 
-        public CuveEntity(int number, int volume, String period, String color, String variety) {
-            this.number = number;
-            this.volume = volume;
-            this.period = period;
-            this.color = color;
-            this.variety = variety;
-        }
-
         @Exclude
-    public Long getId() {
+        public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 

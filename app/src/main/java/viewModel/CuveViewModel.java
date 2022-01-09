@@ -25,7 +25,7 @@ public class CuveViewModel extends AndroidViewModel {
     // MediatorLiveData observe le comportement des données et réagit en conséquence
     private final MediatorLiveData<CuveEntity> observableCuve;
 
-    public CuveViewModel(@NonNull Application application,final int number,
+    public CuveViewModel(@NonNull Application application,final String cuveId,
                            CuveRepository cuveRepository) {
         super(application);
 
@@ -35,10 +35,12 @@ public class CuveViewModel extends AndroidViewModel {
         // set by default null, until we get data from the database.
         observableCuve.setValue(null);
 
-        LiveData<CuveEntity> cuve = repository.getCuve(number);
+        if (cuveId != null) {
+            LiveData<CuveEntity> cuve = repository.getCuve(cuveId);
 
-        // observe the changes of the cuve entity from the database and forward them
-        observableCuve.addSource(cuve, observableCuve::setValue);
+            // observe the changes of the cuve entity from the database and forward them
+            observableCuve.addSource(cuve, observableCuve::setValue);
+        }
     }
 
 
@@ -47,20 +49,20 @@ public class CuveViewModel extends AndroidViewModel {
         @NonNull
         private final Application application;
 
-        private final int number;
+        private final String cuveId;
 
         private final CuveRepository repository;
 
-        public Factory(@NonNull Application application, int cuveNumber) {
+        public Factory(@NonNull Application application, String cuveId) {
             this.application = application;
-            this.number = cuveNumber;
+            this.cuveId = cuveId;
             repository = CuveRepository.getInstance();
         }
 
         @Override
         public <T extends ViewModel> T create(Class<T> modelClass) {
             //noinspection unchecked
-            return (T) new CuveViewModel(application, number, repository);
+            return (T) new CuveViewModel(application, cuveId, repository);
         }
     }
 
@@ -69,7 +71,7 @@ public class CuveViewModel extends AndroidViewModel {
     }
 
     public void createCuve(CuveEntity cuve, OnAsyncEventListener callback) {
-        repository.insert(cuve, callback);
+        CuveRepository.getInstance().insert(cuve, callback);
     }
 
     public void updateCuve(CuveEntity cuve, OnAsyncEventListener callback) {

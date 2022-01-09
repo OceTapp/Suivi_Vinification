@@ -1,7 +1,5 @@
 package database.repository;
 
-import android.content.Context;
-
 import androidx.lifecycle.LiveData;
 
 import com.google.firebase.database.DatabaseReference;
@@ -9,14 +7,10 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-import database.AppDatabase;
-import database.async.CreateCuve;
-import database.async.DeleteCuve;
-import database.async.UpdateCuve;
 import database.entity.CuveEntity;
 import database.util.OnAsyncEventListener;
-import firebase.CuveListLiveData;
-import firebase.CuveLiveData;
+import database.firebase.CuveListLiveData;
+import database.firebase.CuveLiveData;
 
 /**
  * Gestion de toutes les données de l'app dans des instances
@@ -24,8 +18,6 @@ import firebase.CuveLiveData;
 public class CuveRepository {
 
     private static CuveRepository instance;
-
-    private CuveRepository() {}
 
     /**
      * Création d'une instance
@@ -41,11 +33,10 @@ public class CuveRepository {
         return instance;
     }
 
-    public LiveData<CuveEntity> getCuve(final int number) {
-        DatabaseReference reference = FirebaseDatabase.getInstance()
-                .getReference("cuves")
-                //A REVOIR
-                .child(String.valueOf(number));
+    public LiveData<CuveEntity> getCuve(final String id) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().
+                getReference("cuves")
+                .child(id);
         return new CuveLiveData(reference);
     }
 
@@ -59,7 +50,7 @@ public class CuveRepository {
         return new CuveListLiveData(reference);
     }
 
-    public void insert(final CuveEntity cuve, OnAsyncEventListener callback) {
+    public void insert(final CuveEntity cuve, final OnAsyncEventListener callback) {
         String id = FirebaseDatabase.getInstance().getReference("cuves").push().getKey();
         FirebaseDatabase.getInstance()
                 .getReference("cuves")
@@ -73,11 +64,10 @@ public class CuveRepository {
                 });
     }
 
-    public void update(final CuveEntity cuve, OnAsyncEventListener callback) {
+    public void update(final CuveEntity cuve, final OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
-                .getReference("clients")
-                //A REVOIR valueOf
-                .child(String.valueOf(cuve.getId()))
+                .getReference("cuves")
+                .child(cuve.getId())
                 .updateChildren(cuve.toMap(), (databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
@@ -90,8 +80,7 @@ public class CuveRepository {
     public void delete(final CuveEntity cuve, OnAsyncEventListener callback) {
         FirebaseDatabase.getInstance()
                 .getReference("cuves")
-                //VOIR si marche valueOf
-                .child(String.valueOf(cuve.getId()))
+                .child(cuve.getId())
                 .removeValue((databaseError, databaseReference) -> {
                     if (databaseError != null) {
                         callback.onFailure(databaseError.toException());
@@ -101,4 +90,3 @@ public class CuveRepository {
 });
     }
 }
-

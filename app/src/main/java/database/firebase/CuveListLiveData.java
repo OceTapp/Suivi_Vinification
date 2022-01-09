@@ -1,4 +1,4 @@
-package firebase;
+package database.firebase;
 
 import android.util.Log;
 
@@ -54,7 +54,7 @@ public class CuveListLiveData extends LiveData<List<CuveEntity>> {
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             CuveEntity entity = childSnapshot.getValue(CuveEntity.class);
             //voir si ça marche
-            entity.setId(Long.valueOf(childSnapshot.getKey()));
+            entity.setId(childSnapshot.getKey());
             cuves.add(entity);
         }
         return cuves;

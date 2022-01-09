@@ -47,6 +47,7 @@ public class DetailsCuveFragment extends Fragment {
     private TextInputEditText mColor;
     private TextInputEditText mVariety;
     private int number;
+    private String cuveId;
     private Button mModifie;
     private Button mDelete;
 
@@ -71,11 +72,12 @@ public class DetailsCuveFragment extends Fragment {
         mModifie = (Button) mView.findViewById(R.id.CuveActivity_details_button_Change);
         mDelete = (Button) mView.findViewById(R.id.CuveActivity_details_button_Delete);
 
+
         //récupère la view de la bonne cuve en fonction du number
-        number = getActivity().getIntent().getIntExtra("cuveNumber", 0);
+        String idCuve = getActivity().getIntent().getStringExtra("cuveId");
 
         initiateView();
-        CuveViewModel.Factory factory = new CuveViewModel.Factory(getActivity().getApplication(), number);
+        CuveViewModel.Factory factory = new CuveViewModel.Factory(getActivity().getApplication(), idCuve);
         mViewModel = ViewModelProviders.of(this, factory).get(CuveViewModel.class);
         mViewModel.getCuve().observe(getViewLifecycleOwner(), cuveEntity -> {
             if (cuveEntity != null) {

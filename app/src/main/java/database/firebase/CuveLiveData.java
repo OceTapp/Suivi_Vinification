@@ -1,4 +1,4 @@
-package firebase;
+package database.firebase;
 
 import android.util.Log;
 
@@ -41,7 +41,7 @@ public class CuveLiveData extends LiveData<CuveEntity> {
             if (dataSnapshot.exists()) {
                 CuveEntity entity = dataSnapshot.getValue(CuveEntity.class);
                 //A voir si long va
-                entity.setId(Long.valueOf(dataSnapshot.getKey()));
+                entity.setId(dataSnapshot.getKey());
                 setValue(entity);
             }
         }
