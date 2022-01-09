@@ -76,6 +76,8 @@ public class DetailsCuveFragment extends Fragment {
         //récupère la view de la bonne cuve en fonction du number
         String idCuve = getActivity().getIntent().getStringExtra("cuveId");
 
+
+        number = getActivity().getIntent().getIntExtra("cuveNumber", 0);
         initiateView();
         CuveViewModel.Factory factory = new CuveViewModel.Factory(getActivity().getApplication(), idCuve);
         mViewModel = ViewModelProviders.of(this, factory).get(CuveViewModel.class);

@@ -12,6 +12,11 @@ import com.google.firebase.database.ValueEventListener;
 
 import database.entity.CuveEntity;
 
+/**
+ *  @author oceane
+ *  Stucture noSQL d'une cuve
+ *
+ */
 public class CuveLiveData extends LiveData<CuveEntity> {
 
     private static final String TAG = "CuveLiveData";
@@ -36,6 +41,9 @@ public class CuveLiveData extends LiveData<CuveEntity> {
     }
     //Snapshot du changement
     private class MyValueEventListener implements ValueEventListener {
+        /**
+         * Mise à jour de ce qui à changé
+         */
         @Override
         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
             if (dataSnapshot.exists()) {

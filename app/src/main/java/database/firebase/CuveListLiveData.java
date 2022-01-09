@@ -14,7 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import database.entity.CuveEntity;
-
+/**
+ * @author oceane
+ * Stucture noSQL de la liste des cuves
+ */
 public class CuveListLiveData extends LiveData<List<CuveEntity>> {
 
     private static final String TAG = "CuveAccountsLiveData";
@@ -49,11 +52,13 @@ public class CuveListLiveData extends LiveData<List<CuveEntity>> {
         }
     }
 
+    /**
+     * initalise la liste des cuves
+     */
     private List<CuveEntity> toCuveList(DataSnapshot snapshot) {
         List<CuveEntity> cuves = new ArrayList<>();
         for (DataSnapshot childSnapshot : snapshot.getChildren()) {
             CuveEntity entity = childSnapshot.getValue(CuveEntity.class);
-            //voir si ça marche
             entity.setId(childSnapshot.getKey());
             cuves.add(entity);
         }

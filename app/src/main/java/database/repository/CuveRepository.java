@@ -33,6 +33,9 @@ public class CuveRepository {
         return instance;
     }
 
+    /**
+     * Stucture Firebase d'une cuve spécifique
+     */
     public LiveData<CuveEntity> getCuve(final String id) {
         DatabaseReference reference = FirebaseDatabase.getInstance().
                 getReference("cuves")
@@ -42,7 +45,7 @@ public class CuveRepository {
 
 
     /**
-     * Liste l'ensemble des cuves en utilisant la requête getAllCuves de la DAO
+     * Structure Firebase de toutes les cuves
      */
     public LiveData<List<CuveEntity>> getAllCuves() {
         DatabaseReference reference = FirebaseDatabase.getInstance()

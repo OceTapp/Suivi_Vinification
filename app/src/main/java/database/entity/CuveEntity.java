@@ -92,7 +92,9 @@ public class CuveEntity {
             return number + " " + variety;
         }
 
-        //Use for updated
+    /**
+     * Utiliser pour mettre à jour
+     */
         @Exclude
         public Map<String, Object> toMap() {
             HashMap<String, Object> result = new HashMap<>();
